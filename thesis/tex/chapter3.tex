@@ -156,6 +156,120 @@ R_P(s,\ell)=\{[t]_P\mid s\overset{\ell}{\Rightarrow}_W t\}.
 \]
 حالت‌های یک بلوک که امضای متفاوت دارند از یکدیگر جدا می‌شوند. وجود $[s]_P$ در امضا تضمین می‌کند دورهای بعدی فقط بلوک‌های موجود را بشکنند و دو بلوک جداشده دوباره ادغام نشوند. فرایند زمانی پایان می‌یابد که هیچ امضای تازه‌ای باعث شکستن بلوک نشود. افراز حاصل پایدار است و رده‌های شبیه‌سازی دوسویهٔ ضعیف زمان‌دار را برای معنای ورودی محاسبه می‌کند.
 
+الگوریتم‌های \ref{alg:tau-closure} تا \ref{alg:partition-refinement} شبه‌کد اصلی این فرایند را در چهار مرحله نشان می‌دهند. جداسازی این مراحل روشن می‌کند که رابطهٔ ضعیف چگونه از گذارهای مستقیم ساخته می‌شود و افراز در هر دور دقیقاً بر چه اساسی شکسته می‌شود. در این الگوریتم‌ها، $C_\tau(s)$ بستار کنش داخلی از حالت $s$، $L$ مجموعهٔ برچسب‌های غیر از $\tau$ و $W$ رابطهٔ گذار ضعیف است. در حالت پیش‌فرض پیاده‌سازی، پالایش واحدی پیش از اجرای این مراحل انجام می‌شود و تنها برچسب زمانی موجود در $L$ برابر یک واحد است؛ در خوانش سخت‌گیرانه، $L$ مدت‌های ثبت‌شده روی یال‌های ورودی را نیز در بر می‌گیرد.
+
+الگوریتم \ref{alg:tau-closure} بستار داخلی یک حالت را محاسبه می‌کند. این بستار شامل همهٔ حالت‌هایی است که با صفر یا چند گذار داخلی دسترس‌پذیرند. افزودن خود $s$ به مجموعهٔ آغازین، حرکت داخلی تهی را نیز پوشش می‌دهد. مجموعهٔ \lr{visited} مانع بررسی دوبارهٔ حالت‌ها می‌شود و پایان پیمایش را در حضور چرخه‌های $\tau$ تضمین می‌کند.
+
+\begin{algorithm}[htbp]
+\onehalfspacing
+\caption{\lr{Tau Closure}}
+\label{alg:tau-closure}
+\begin{latin}
+\begin{algorithmic}[1]
+\REQUIRE A transition system $T=(S,L\cup\{\tau\},\rightarrow)$ and a state $s\in S$
+\ENSURE All states reachable from $s$ through zero or more $\tau$ transitions
+\STATE $\mathit{visited}\gets\{s\}$
+\STATE $\mathit{stack}\gets[s]$
+\WHILE{$\mathit{stack}$ is not empty}
+    \STATE $x\gets\operatorname{pop}(\mathit{stack})$
+    \FOR{each transition $(x,\tau,y)\in\rightarrow$}
+        \IF{$y\notin\mathit{visited}$}
+            \STATE $\mathit{visited}\gets\mathit{visited}\cup\{y\}$
+            \STATE $\operatorname{push}(\mathit{stack},y)$
+        \ENDIF
+    \ENDFOR
+\ENDWHILE
+\RETURN $\mathit{visited}$
+\end{algorithmic}
+\end{latin}
+\end{algorithm}
+
+الگوریتم \ref{alg:weak-successors} یک برچسب غیر از $\tau$ را میان دو بستار داخلی قرار می‌دهد. اگر $\ell$ یک کنش قابل مشاهده باشد، خروجی همان $\tau^*\ell\tau^*$ است؛ اگر $\ell$ یک برچسب زمانی باشد، خروجی مقصدهای گذار ضعیف با همان مدت را می‌دهد. در حالت \lr{unit}، تکرار این رابطهٔ یک‌واحدی مدت‌های بزرگ‌تر را می‌سازد.
+
+\begin{algorithm}[htbp]
+\onehalfspacing
+\caption{\lr{Weak Successors for One Label}}
+\label{alg:weak-successors}
+\begin{latin}
+\begin{algorithmic}[1]
+\REQUIRE A transition system $T$, tau closures $C_\tau$, a state $s$, and a label $\ell\neq\tau$
+\ENSURE The targets of the weak step $s\overset{\ell}{\Rightarrow}_W t$
+\STATE $\mathit{targets}\gets\varnothing$
+\FOR{each state $x\in C_\tau(s)$}
+    \FOR{each transition $(x,\ell,y)\in\rightarrow$}
+        \FOR{each state $t\in C_\tau(y)$}
+            \STATE $\mathit{targets}\gets\mathit{targets}\cup\{t\}$
+        \ENDFOR
+    \ENDFOR
+\ENDFOR
+\RETURN $\mathit{targets}$
+\end{algorithmic}
+\end{latin}
+\end{algorithm}
+
+الگوریتم \ref{alg:weak-relation} دو محاسبهٔ قبلی را برای همهٔ حالت‌ها و برچسب‌ها انجام می‌دهد. خروجی آن علاوه بر $W$، بستارهای داخلی را نیز نگه می‌دارد؛ زیرا $C_\tau(s)$ حالت مدت صفر تعریف \ref{def:weak-transition} است و در پالایش افراز باید مانند دیگر حرکت‌های ضعیف بررسی شود.
+
+\begin{algorithm}[htbp]
+\onehalfspacing
+\caption{\lr{Weak Transition Relation}}
+\label{alg:weak-relation}
+\begin{latin}
+\begin{algorithmic}[1]
+\REQUIRE A timed transition system $T=(S,\mathit{Act}\cup\{\tau\}\cup D,\rightarrow)$
+\ENSURE Tau closures $C_\tau$, non-tau labels $L$, and weak relation $W$
+\FOR{each state $s\in S$}
+    \STATE $C_\tau(s)\gets\operatorname{TauClosure}(T,s)$
+\ENDFOR
+\STATE $L\gets\{\ell\mid (x,\ell,y)\in\rightarrow\ \land\ \ell\neq\tau\}$
+\STATE $W\gets\varnothing$
+\FOR{each state $s\in S$}
+    \FOR{each label $\ell\in L$}
+        \STATE $A\gets\operatorname{WeakSuccessors}(T,C_\tau,s,\ell)$
+        \FOR{each state $t\in A$}
+            \STATE $W\gets W\cup\{(s,\ell,t)\}$
+        \ENDFOR
+    \ENDFOR
+\ENDFOR
+\RETURN $(C_\tau,L,W)$
+\end{algorithmic}
+\end{latin}
+\end{algorithm}
+
+الگوریتم \ref{alg:partition-refinement} با قرار دادن همهٔ حالت‌ها در یک بلوک آغاز می‌شود. در هر دور، برای هر حالت مجموعهٔ بلوک‌های قابل دسترس با هر برچسب و مجموعهٔ بلوک‌های موجود در بستار داخلی محاسبه می‌شود. دو حالت تنها زمانی در یک بلوک می‌مانند که بلوک فعلی و همهٔ این مجموعه‌ها برای آن‌ها یکسان باشند. مقایسهٔ آرایهٔ $\mathit{nextBlock}$ با $\mathit{block}$ شرط توقف را به‌صورت صریح نشان می‌دهد.
+
+\begin{algorithm}[htbp]
+\onehalfspacing
+\caption{\lr{Stable Partition Refinement}}
+\label{alg:partition-refinement}
+\begin{latin}
+\begin{algorithmic}[1]
+\REQUIRE States $S$, tau closures $C_\tau$, labels $L$, and weak relation $W$
+\ENSURE The coarsest stable partition $P$
+\FOR{each state $s\in S$}
+    \STATE $\mathit{block}[s]\gets 0$
+\ENDFOR
+\REPEAT
+    \STATE $\mathit{signatureIds}\gets$ an empty ordered map
+    \FOR{each state $s\in S$}
+        \FOR{each label $\ell\in L$}
+            \STATE $R_\ell(s)\gets\{\mathit{block}[t]\mid(s,\ell,t)\in W\}$
+        \ENDFOR
+        \STATE $R_\varepsilon(s)\gets\{\mathit{block}[t]\mid t\in C_\tau(s)\}$
+        \STATE $\sigma(s)\gets(\mathit{block}[s],(R_\ell(s))_{\ell\in L},R_\varepsilon(s))$
+        \IF{$\sigma(s)\notin\mathit{signatureIds}$}
+            \STATE Assign the next unused block id to $\mathit{signatureIds}[\sigma(s)]$.
+        \ENDIF
+        \STATE $\mathit{nextBlock}[s]\gets\mathit{signatureIds}[\sigma(s)]$
+    \ENDFOR
+    \STATE $\mathit{changed}\gets(\mathit{nextBlock}\neq\mathit{block})$
+    \STATE $\mathit{block}\gets\mathit{nextBlock}$
+\UNTIL{$\mathit{changed}=\mathit{false}$}
+\STATE $P\gets\bigl\{\{s\in S\mid\mathit{block}[s]=i\}\mid i\text{ is an assigned id}\bigr\}$
+\RETURN $P$
+\end{algorithmic}
+\end{latin}
+\end{algorithm}
+
 پیاده‌سازی مبتنی بر امضا در هر دور، برای هر حالت و هر برچسب مجموعهٔ بلوک‌های مقصد را بررسی می‌کند و حداکثر به تعداد حالت‌ها دور دارد. الگوریتم‌های پالایش پیشرفته‌تری با کران مجانبی بهتر وجود دارند، اما روش حاضر با شبه‌کد پروژه تطابق مستقیم دارد و برای بزرگ‌ترین ورودی موجود، که ۴۲ حالت پیش از پالایش زمانی دارد، کافی بوده است. فصل \ref{chap:results} از این اندازه فراتر ادعای مقیاس‌پذیری نمی‌کند.
 
 \section{ساخت مدل خارج‌قسمتی و فشرده‌سازی زمان}

@@ -67,7 +67,7 @@
 - Keep chapter content in `thesis/tex/chapter*.tex`, Persian and English metadata in `faTitle.tex` and `enTitle.tex`, bibliography records in `MyReferences.bib`, glossary terms in `words.tex`, and abbreviations in `acronyms.tex`.
 - Preserve the modular file structure. Add a chapter or appendix through a dedicated file and include it from `main.tex`.
 - Modify `tehran-thesis.cls` or central formatting in `commands.tex` only when a confirmed formatting requirement cannot be satisfied in a content file.
-- The active copy currently uses the `bsc` and `draft` options, with dedication and acknowledgement pages disabled. Change these settings, especially final-mode preparation, only when the user asks.
+- The active copy uses the `bsc` option in final mode, with dedication and acknowledgement pages disabled. Re-enable draft mode or optional front matter only when the user asks.
 - Every figure, table, algorithm, listing, and equation that is discussed in prose must have an informative caption where applicable, a unique `\label`, and a corresponding reference in the text.
 - Do not commit `thesis/main.pdf`, auxiliary LaTeX files, logs, or other build artifacts produced inside `thesis/`.
 - After a successful full build, copy `thesis/main.pdf` to the repository root as `thesis.pdf`. This root-level PDF is the sole generated artifact that should be tracked and must represent the latest committed thesis source.
