@@ -1,0 +1,41 @@
+% !TeX root=../main.tex
+
+\chapter{مدل‌های ربکای به‌کاررفته در ارزیابی}
+\label{app:rebeca-models}
+
+این پیوست متن کامل هفت مدل ربکای زمان‌داری را می‌آورد که بخش \ref{sec:rebeca-case-studies} از فضای حالت تولیدشدهٔ آن‌ها استفاده می‌کند. مدل‌ها همان فایل‌هایی هستند که به کامپایلر ربکا داده شده‌اند؛ تنها تورفتگی و فاصله‌گذاری آن‌ها برای خوانایی مرتب شده است و هیچ دستور یا مقداری تغییر نکرده است.
+
+سطر نخست هر فایل، مجموعهٔ تعامل‌های قابل مشاهدهٔ آن مدل را به‌صورت توضیح ثبت می‌کند. این توضیح فقط مستندسازی است و به فایل فضای حالت منتقل نمی‌شود؛ مجموعهٔ مشاهده باید هنگام اجرا با گزینهٔ \lr{--observable} به ابزار داده شود. مدل \lr{teacher3} چنین توضیحی ندارد و مجموعهٔ مشاهدهٔ خانوادهٔ خود، یعنی \lr{teacher.TEACH}، برای آن به کار رفته است.
+
+\section{خانوادهٔ \lr{mood}}
+
+متن این دو مدل در برنامه‌های \ref{lst:mood1} و \ref{lst:mood2} فصل \ref{chap:results} آمده است و در اینجا تکرار نمی‌شود.
+
+\section{خانوادهٔ \lr{teacher}}
+
+\begin{latin}
+\singlespacing
+\lstinputlisting[language=Java,basicstyle=\ttfamily\footnotesize,caption={مدل \lr{teacher1}؛ شمارندهٔ \lr{wand} در کلاس معلم به‌روز می‌شود.},label={lst:teacher1}]{teacher1.rebeca}
+\end{latin}
+
+\begin{latin}
+\singlespacing
+\lstinputlisting[language=Java,basicstyle=\ttfamily\footnotesize,caption={مدل \lr{teacher2}؛ شمارندهٔ \lr{wand} اعلام می‌شود اما هرگز تغییر نمی‌کند.},label={lst:teacher2}]{teacher2.rebeca}
+\end{latin}
+
+\begin{latin}
+\singlespacing
+\lstinputlisting[language=Java,basicstyle=\ttfamily\footnotesize,caption={مدل \lr{teacher3}؛ شمارندهٔ \lr{wand} در کلاس دانش‌آموز به‌روز می‌شود.},label={lst:teacher3}]{teacher3.rebeca}
+\end{latin}
+
+\section{خانوادهٔ \lr{chain}}
+
+\begin{latin}
+\singlespacing
+\lstinputlisting[language=Java,basicstyle=\ttfamily\footnotesize,caption={مدل \lr{chain1}؛ تصمیم‌گیری با زنجیره‌ای از پیام‌های میانی.},label={lst:chain1}]{chain1.rebeca}
+\end{latin}
+
+\begin{latin}
+\singlespacing
+\lstinputlisting[language=Java,basicstyle=\ttfamily\footnotesize,caption={مدل \lr{chain2}؛ همان تصمیم‌گیری بدون پیام‌های میانی.},label={lst:chain2}]{chain2.rebeca}
+\end{latin}

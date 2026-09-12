@@ -19,6 +19,8 @@
 *.ps
 *.eps
 *.pdf
+# figure sources are vector PDFs and must be tracked
+!img/*.pdf
 
 ## Bibliography auxiliary files (bibtex/biblatex/biber):
 *.bbl

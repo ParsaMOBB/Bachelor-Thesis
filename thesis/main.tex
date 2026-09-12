@@ -32,6 +32,14 @@ twoside
 \include{./tex/chapter4}		% فصل چهارم: نتایج
 \include{./tex/chapter5}		% فصل پنجم: بحث و نتیجه‌گیری
 
+\appendix
+% فصل‌های پس از این قسمت به‌عنوان پیوست شماره‌گذاری می‌شوند.
+\addtocontents{toc}{
+    \protect\renewcommand\protect\cftchappresnum{\appendixname~}%
+    \protect\setlength{\cftchapnumwidth}{\mylenapp}}
+
+\include{./tex/appendix1}		% پیوست اول: مدل‌های ربکای ارزیابی
+
 % مراجع
 \pagestyle{empty}
 {
