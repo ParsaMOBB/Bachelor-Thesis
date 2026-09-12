@@ -100,9 +100,8 @@ S=(Q,q_0,\rightarrow)
 است که $Q$ مجموعهٔ پیکربندی‌ها، $q_0\in Q$ پیکربندی آغازین و $\rightarrow$ رابطهٔ گذار است. هر گذار یکی از دو نوع زیر است:
 \begin{itemize}
 \item \emph{حرکت تأخیری} $q\xrightarrow{d}q'$ با $d\in\mathbb{T}$، که گذشت دقیقاً $d$ واحد زمان را نشان می‌دهد؛
-\item \emph{حرکت گسسته} $q\xrightarrow{a}q'$ با $a\in\Sigma_\tau$، که اجرای یک کنش قابل مشاهده یا یک کنش داخلی را نشان می‌دهد.
+\item \emph{حرکت گسسته} $q\xrightarrow{a}q'$ با $a\in\Sigma_\tau$، که اجرای یک کنش قابل مشاهده یا یک کنش داخلی را نشان می‌دهد \cite{BerardEtAl2008}.
 \end{itemize}
-\cite{BerardEtAl2008}
 \end{definition}
 
 حرکت گسسته آنی است و زمانی مصرف نمی‌کند؛ کل زمان سپری‌شده در یک اجرا فقط از حرکت‌های تأخیری می‌آید. افزون بر این، رابطهٔ $\rightarrow$ باید چهار ویژگی استاندارد زیر را داشته باشد. این ویژگی‌ها در ادامهٔ پایان‌نامه صریحاً استفاده می‌شوند، به‌ویژه در بخش \ref{sec:unit-splitting} که توضیح می‌دهد چرا یال‌های تأخیر به گام‌های یک‌واحدی شکسته می‌شوند.
@@ -138,9 +137,8 @@ q\xrightarrow{d'}q''\xrightarrow{d''}q';
 برای اجرای $\rho$ با دنبالهٔ برچسب‌های $w$:
 \begin{itemize}
 \item $\operatorname{Untimed}(\rho)$ کلمه‌ای است که از چسباندن برچسب‌های کنشی $a_0a_1\cdots$ به دست می‌آید، به‌طوری‌که کنش‌های داخلی حذف می‌شوند؛ پس این کلمه فقط از کنش‌های قابل مشاهدهٔ $\Sigma$ ساخته شده است؛
-\item $\operatorname{Duration}(\rho)=\sum_{i=0}^{|\rho|}d_i$ مجموع همهٔ مدت‌های اجراست، که در آن $|\rho|$ طول اجراست.
+\item $\operatorname{Duration}(\rho)=\sum_{i=0}^{|\rho|}d_i$ مجموع همهٔ مدت‌های اجراست، که در آن $|\rho|$ طول اجراست \cite{BerardEtAl2008}.
 \end{itemize}
-\cite{BerardEtAl2008}
 \end{definition}
 
 \section{هم‌ارزی‌های رفتاری روی سامانهٔ انتقال برچسب‌دار}
@@ -153,9 +151,8 @@ q\xrightarrow{d'}q''\xrightarrow{d''}q';
 فرض کنید $S_1$ و $S_2$ دو سامانهٔ انتقال برچسب‌دار با مجموعهٔ برچسب مشترک $\Lambda$ باشند. رابطهٔ $R\subseteq Q_1\times Q_2$ یک شبیه‌سازی دوسویهٔ قوی است، هرگاه برای هر $(p,q)\in R$ و هر $\mu\in\Lambda$:
 \begin{enumerate}
 \item اگر $p\xrightarrow{\mu}_1p'$، حالتی مانند $q'$ وجود داشته باشد که $q\xrightarrow{\mu}_2q'$ و $(p',q')\in R$؛
-\item اگر $q\xrightarrow{\mu}_2q'$، حالتی مانند $p'$ وجود داشته باشد که $p\xrightarrow{\mu}_1p'$ و $(p',q')\in R$.
+\item اگر $q\xrightarrow{\mu}_2q'$، حالتی مانند $p'$ وجود داشته باشد که $p\xrightarrow{\mu}_1p'$ و $(p',q')\in R$ \cite{Milner1989,BaierKatoen2008}.
 \end{enumerate}
-\cite{Milner1989,BaierKatoen2008}
 \end{definition}
 
 در تعریف قوی، کنش داخلی نیز مانند هر کنش دیگری باید جداگانه پاسخ داده شود. هنگام کاهش مدل، این حساسیت جزئیاتی را حفظ می‌کند که از دید ناظر بیرونی اهمیتی ندارند. دو راه شناخته‌شده برای تجرید از کنش داخلی وجود دارد. \gls{WeakBisimulation}، که میلنر معرفی کرده است، اجازه می‌دهد یک کنش قابل مشاهده با دنباله‌ای از کنش‌های داخلی پیش و پس از آن پاسخ داده شود و کنش داخلی با دنبالهٔ دلخواهی از کنش‌های داخلی \cite{Milner1989}. \gls{BranchingBisimulation}، که فان‌گلابیک و ویلاند معرفی کرده‌اند، شرط سخت‌گیرانه‌تری می‌گذارد: در طول کنش‌های داخلیِ پاسخ، ردهٔ رفتاری نباید تغییر کند و بنابراین ساختار انشعاب نیز حفظ می‌شود \cite{GlabbeekWeijland1996}.
@@ -197,11 +194,11 @@ q\Rightarrow q_1\xrightarrow{\mu}q',
 
 \begin{definition}[رابطهٔ گذار ضعیف]
 \label{def:weak-transition}
-برای سامانهٔ انتقال زمان‌دار $S=(Q,q_0,\rightarrow)$، رابطهٔ
+برای سامانهٔ انتقال زمان‌دار $S=(Q,q_0,\rightarrow)$، برار و همکاران رابطهٔ
 \[
 \Rightarrow\;\subseteq\;Q\times(\Sigma\cup\mathbb{T})\times Q
 \]
-برای $a\in\Sigma$ و $d\in\mathbb{T}$ چنین تعریف می‌شود:
+را برای $a\in\Sigma$ و $d\in\mathbb{T}$ چنین تعریف می‌کنند \cite{BerardEtAl2008}:
 \begin{itemize}
 \item $q\overset{d}{\Rightarrow}q'$ اگر و تنها اگر اجرایی مانند $\rho=q\xrightarrow{w}q'$ وجود داشته باشد با
 \[
@@ -216,7 +213,6 @@ q\Rightarrow q_1\xrightarrow{\mu}q',
 \operatorname{Duration}(\rho)=0.
 \]
 \end{itemize}
-\cite{BerardEtAl2008}
 \end{definition}
 
 به بیان دیگر، یک گام ضعیفِ زمانی هر اجرایی است که هیچ کنش قابل مشاهده‌ای در آن رخ ندهد و مجموع مدت‌هایش دقیقاً $d$ باشد؛ این اجرا می‌تواند هر تعداد گام داخلی و هر تعداد حرکت تأخیری داشته باشد. یک گام ضعیفِ کنشی نیز اجرایی است که دقیقاً یک کنش قابل مشاهده دارد و زمانی در آن نمی‌گذرد، اما می‌تواند گام‌های داخلی پیش و پس از آن کنش را در خود جمع کند.
